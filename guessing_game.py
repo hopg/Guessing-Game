@@ -18,11 +18,11 @@ while True:
         high = int(input('Please choose a higher bound for the guessing game: '))
     except:
         clear_output()
-        print('Please choose a positive number!')
+        print('Please select a positive integer!')
     else:
         if high <= 0:
             clear_output()
-            print('Please select a positive number.')
+            print('Please select a positive integer!')
         else:
             clear_output()
             print(f'You have selected {high} as the higher bound.')
@@ -34,11 +34,11 @@ while True:
         number = int(input(f"Please choose a postive number, under {high}, that you'd like the computer to guess: "))
     except:
         clear_output()
-        print(f"Please choose a postive number under {high}!")
+        print(f"Please choose a postive integer under {high}!")
     else:
         if number >= high or number < 0: # negative 
             clear_output()
-            print(f"Please choose a positive number under {high}!")
+            print(f"Please choose a positive integer under {high}!")
         else:
             clear_output()
             print(f'You have selected {number}')
@@ -49,7 +49,7 @@ while True:
 while guessing:
     if guess == number:
         print(f"The computer has guessed {number} correctly in {count + 1} guesses!")
-        print(f'The guesses were {guess_list[1::]}')
+        print(f'The guesses were {", ".join([str(x) for x in guess_list[1::]])}.')
         guessing = False
         break
     else:
@@ -81,7 +81,7 @@ while guessing:
             if count <= 1:
                 guess = math.ceil((high + guess)/2)
             else:
-                guess = guess +  math.floor(math.fabs((previous_guess - guess)/2))
+                guess = guess +  max(1, math.floor(math.fabs((previous_guess - guess)/2)))
 
         else: # If response is lower
             if count <= 1 or "l"*count == "".join(responses_list[1::]): 
